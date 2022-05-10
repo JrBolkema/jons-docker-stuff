@@ -1,0 +1,25 @@
+version: "3.1"
+
+services:
+  dotnetthing:
+    image: dotnetthing:v0.3
+    volumes:
+      - C:\dev\docker-stuff\data:/app/data dotnetthing:v0.3
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: TokyoJoe138!
+    volumes:
+      - c:\dev\docker-stuff\mongo-data:data/db
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODBUSERNAME: admin
+      ME_CONFIG_MONGODBPASSWORD: TokyoJoe138!
+      ME_CONFIG_MONGODB_URL: mongdb://admin:TokyoJoe138!@mongo:27017

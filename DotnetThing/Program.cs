@@ -1,17 +1,26 @@
 ﻿var fileName = "someText.txt";
-var current = 0;
-var path = Path.Join("data",fileName);
 
-if(File.Exists(path)){
+var current = 0;
+
+var path = Path.Join("data", fileName);
+
+if (File.Exists(path))
+{
     var content = File.ReadAllText(path);
     current = int.Parse(content);
 }
-Console.WriteLine( $"Current is {current}");
+else
+{
+    Directory.CreateDirectory("data");
+    File.CreateText(path);
+}
+
+Console.WriteLine($"Current is {current}");
 
 while (true)
 {
-    Thread.Sleep(300);
+    Thread.Sleep(3000);
     current = ++current;
-    File.WriteAllText(path,current.ToString());
-    System.Console.WriteLine(  $"Wrote {current} at {DateTime.Now}");
+    File.WriteAllText(path, (current).ToString());
+    Console.WriteLine($"Wrote {current} at {DateTime.Now:t}");
 }
